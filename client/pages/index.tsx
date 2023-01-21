@@ -1,24 +1,32 @@
-import { useState, useEffect } from 'react'
-import { nftContractAddress } from '../config.js'
-import { ethers } from 'ethers'
-import axios from 'axios'
+import { useState, useEffect } from 'react';
+import Image from "next/image";
+import { nftContractAddress } from '../config.js';
+import { ethers } from 'ethers';
+import axios from 'axios';
 
 import Loader from 'react-loader-spinner';
 
 
-import NFT from '../utils/knft.json'
+import NFT from '../utils/knft.json';
+
+declare var window: any;
+
 
 const mint = () => {
-	const [mintedNFT, setMintedNFT] = useState(null)
-	const [miningStatus, setMiningStatus] = useState(null)
-	const [loadingState, setLoadingState] = useState(0)
-	const [txError, setTxError] = useState(null)
-	const [currentAccount, setCurrentAccount] = useState('')
-	const [correctNetwork, setCorrectNetwork] = useState(false)
+	const [mintedNFT, setMintedNFT] = useState<String>("");
+	const [miningStatus, setMiningStatus] = useState(0);
+	const [loadingState, setLoadingState] = useState(0);
+	const [txError, setTxError] = useState<String>("");
+	const [currentAccount, setCurrentAccount] = useState<String>("");
+	const [correctNetwork, setCorrectNetwork] = useState(false);
 
 	// Checks if wallet is connected
 	const checkIfWalletIsConnected = async () => {
-		const { ethereum } = window
+		
+		const { ethereum } = window;
+
+		
+
 		if (ethereum) {
 			console.log('Got the ethereum obejct: ', ethereum)
 		} else {
@@ -234,10 +242,12 @@ const mint = () => {
 					<div className='font-semibold text-lg text-center mb-4'>
 						Your Eternal Domain Character
 					</div>
-					<img
-						src={mintedNFT}
+					<Image
+						src={String(mintedNFT)}
 						alt=''
 						className='h-60 w-60 rounded-lg shadow-2xl shadow-[#6FFFE9] hover:scale-105 transition duration-500 ease-in-out'
+                        width={500}
+                        height={500}					
 					/>
 				</div>
 			)}

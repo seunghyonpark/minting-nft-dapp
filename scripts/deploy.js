@@ -4,6 +4,8 @@ const main = async() => {
   await nftContract.deployed()
 
   console.log("Contract deployed to: ", nftContract.address)
+
+  
 }
 
 const runMain = async() => {

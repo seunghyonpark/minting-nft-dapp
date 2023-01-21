@@ -37,6 +37,9 @@ const mint = () => {
 	// Calls Metamask to connect wallet on clicking Connect Wallet button
 	const connectWallet = async () => {
 		try {
+
+			
+
 			const { ethereum } = window
 
 			if (!ethereum) {
@@ -46,12 +49,20 @@ const mint = () => {
 			let chainId = await ethereum.request({ method: 'eth_chainId'})
 			console.log('Connected to chain:' + chainId)
 
-			const rinkebyChainId = '0x4'
-
+			/*
+			const rinkebyChainId = '0x4';
 			if (chainId !== rinkebyChainId) {
 				alert('You are not connected to the Rinkeby Testnet!')
 				return
 			}
+			*/
+
+			const mumbaiChainId = "0x13881";
+			if (chainId !== mumbaiChainId) {
+				alert('You are not connected to the Mumbai!')
+				return
+			}
+
 
 			const accounts = await ethereum.request({ method: 'eth_requestAccounts' })
 
@@ -68,6 +79,7 @@ const mint = () => {
 		let chainId = await ethereum.request({ method: 'eth_chainId' })
 		console.log('Connected to chain:' + chainId)
 
+		/*
 		const rinkebyChainId = '0x4'
 
 		if (chainId !== rinkebyChainId) {
@@ -75,6 +87,16 @@ const mint = () => {
 		} else {
 			setCorrectNetwork(true)
 		}
+		*/
+
+		const mumbaiChainId = "0x13881";
+
+		if (chainId !== mumbaiChainId) {
+			setCorrectNetwork(false)
+		} else {
+			setCorrectNetwork(true)
+		}
+
 	}
 
 	useEffect(() => {
@@ -88,13 +110,13 @@ const mint = () => {
 			const { ethereum } = window
 
 			if (ethereum) {
-				const provider = new ethers.providers.Web3Provider(ethereum)
-				const signer = provider.getSigner()
+				const provider = new ethers.providers.Web3Provider(ethereum);
+				const signer = provider.getSigner();
 				const nftContract = new ethers.Contract(
 					nftContractAddress,
 					NFT.abi,
 					signer
-				)
+				);
 
 				let nftTx = await nftContract.createknft()
 				console.log('Mining....', nftTx.hash)
@@ -108,21 +130,23 @@ const mint = () => {
 				let tokenId = value.toNumber()
 
 				console.log(
-					`Mined, see transaction: https://rinkeby.etherscan.io/tx/${nftTx.hash}`
+					////`Mined, see transaction: https://rinkeby.etherscan.io/tx/${nftTx.hash}`
+
+					`Mined, see transaction: https://mumbai.polygonscan.com/tx/${nftTx.hash}`
 				)
 
 				getMintedNFT(tokenId)
 			} else {
 				console.log("Ethereum object doesn't exist!")
 			}
-		} catch (error) {
+		} catch (error: any) {
 			console.log('Error minting character', error)
 			setTxError(error.message)
 		}
 	}
 
 	// Gets the minted NFT data
-	const getMintedNFT = async (tokenId) => {
+	const getMintedNFT = async (tokenId: any) => {
 		try {
 			const { ethereum } = window
 
@@ -144,7 +168,7 @@ const mint = () => {
 			} else {
 				console.log("Ethereum object doesn't exist!")
 			}
-		} catch (error) {
+		} catch (error: any) {
 			console.log(error)
 			setTxError(error.message)
 		}
@@ -181,7 +205,7 @@ const mint = () => {
 			)}
 			<div className='text-xl font-semibold mb-20 mt-4'>
 				<a
-					href={`https://rinkeby.rarible.com/collection/${nftContractAddress}`}
+					href={`https://testnet.rarible.com/collection/${nftContractAddress}`}
 					target='_blank'
 				>
 					<span className='hover:underline hover:underline-offset-8 '>

@@ -3,7 +3,7 @@ import { nftContractAddress } from '../config.js'
 import { ethers } from 'ethers'
 import axios from 'axios'
 
-import Loader from 'react-loader-spinner';
+//import Loader from 'react-loader-spinner';
 
 
 import NFT from '../utils/knft.json'

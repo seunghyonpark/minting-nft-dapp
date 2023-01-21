@@ -12,6 +12,7 @@ import NFT from '../utils/knft.json';
 declare var window: any;
 
 
+
 const mint = () => {
 	const [mintedNFT, setMintedNFT] = useState<String>("");
 	const [miningStatus, setMiningStatus] = useState(0);
@@ -24,8 +25,6 @@ const mint = () => {
 	const checkIfWalletIsConnected = async () => {
 		
 		const { ethereum } = window;
-
-		
 
 		if (ethereum) {
 			console.log('Got the ethereum obejct: ', ethereum)

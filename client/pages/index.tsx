@@ -5,6 +5,7 @@ import axios from 'axios'
 
 import Loader from 'react-loader-spinner';
 
+
 import NFT from '../utils/knft.json'
 
 const mint = () => {
